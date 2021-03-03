@@ -15,15 +15,18 @@ func Hello(name string, language string) string {
 		name = "world"
 	}
 
-	if language == es {
-		return spanishGreeting + name
-	}
+	return greeting(language) + name
+}
 
-	if language == fr {
-		return frenchGreeting + name
+func greeting(language string) (greeting string) {
+	switch language {
+	case fr:
+		return frenchGreeting
+	case es:
+		return spanishGreeting
+	default:
+		return englishGreeting
 	}
-
-	return englishGreeting + name
 }
 
 func main() {
