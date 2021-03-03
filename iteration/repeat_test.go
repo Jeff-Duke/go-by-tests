@@ -1,6 +1,9 @@
 package iteration
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestRepeat(t *testing.T) {
 
@@ -12,22 +15,35 @@ func TestRepeat(t *testing.T) {
 	}
 
 	t.Run("repeats a single char", func(t *testing.T) {
-		repeated := Repeat("a")
+		repeated := Repeat("a", 5)
 		expected := "aaaaa"
 		assertRepeated(t, expected, repeated)
 	})
 
 	t.Run("repeats any char", func(t *testing.T) {
-		repeated := Repeat("d")
+		repeated := Repeat("d", 5)
 		expected := "ddddd"
 
 		assertRepeated(t, expected, repeated)
 	})
 
 	t.Run("repeats any string", func(t *testing.T) {
-		repeated := Repeat("ha")
+		repeated := Repeat("ha", 5)
 		expected := "hahahahaha"
 
 		assertRepeated(t, expected, repeated)
 	})
+
+	t.Run("repeats by count provided", func(t *testing.T) {
+		repeated := Repeat("lol", 3)
+		expected := "lollollol"
+
+		assertRepeated(t, expected, repeated)
+	})
+}
+
+func ExampleRepeat() {
+	repeated := Repeat("a", 5)
+	fmt.Println(repeated)
+	// Output: aaaaa
 }
