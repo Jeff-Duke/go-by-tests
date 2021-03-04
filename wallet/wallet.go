@@ -9,14 +9,14 @@ func (c Crypto) String() string {
 	return fmt.Sprintf("%d BTC", c)
 }
 
-// Wallet holds coin
-type Wallet struct {
-	balance Crypto
-}
-
 // Stringer does some stringing
 type Stringer interface {
 	String() string
+}
+
+// Wallet holds coin
+type Wallet struct {
+	balance Crypto
 }
 
 // Balance returns the amount of coin in the wallet
@@ -27,4 +27,9 @@ func (w *Wallet) Balance() Crypto {
 // Deposit adds new coin to the wallet
 func (w *Wallet) Deposit(amt Crypto) {
 	w.balance += amt
+}
+
+// Withdraw removes coin from the wallet
+func (w *Wallet) Withdraw(amt Crypto) {
+	w.balance -= amt
 }
