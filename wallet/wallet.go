@@ -1,6 +1,9 @@
 package wallet
 
-import "fmt"
+import (
+	"errors"
+	"fmt"
+)
 
 // Crypto is a type alias for our Cryptocurrency
 type Crypto int
@@ -30,6 +33,10 @@ func (w *Wallet) Deposit(amt Crypto) {
 }
 
 // Withdraw removes coin from the wallet
-func (w *Wallet) Withdraw(amt Crypto) {
+func (w *Wallet) Withdraw(amt Crypto) error {
+	if amt > w.balance {
+		return errors.New("you've overdrawn your funds")
+	}
 	w.balance -= amt
+	return nil
 }
