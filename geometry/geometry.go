@@ -23,17 +23,22 @@ type Circle struct {
 	Radius float64
 }
 
-// Returns the area of a rectangle
+// Triangle is a basic shape
+type Triangle struct {
+	Base, Height float64
+}
+
+// Area returns the area of a rectangle
 func (r Rectangle) Area() float64 {
 	return r.Length * r.Width
 }
 
-// Returns the area of a circle
+// Area returns the area of a circle
 func (c Circle) Area() float64 {
 	return math.Pi * c.Radius * c.Radius
 }
 
-// // Area returns the area of a shape
-// func Area(rect Rectangle) float64 {
-// 	return rect.Length * rect.Width
-// }
+// Area returns the area of a triangle
+func (t Triangle) Area() float64 {
+	return (t.Base * t.Height) * 0.5
+}
