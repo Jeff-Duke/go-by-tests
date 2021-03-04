@@ -2,6 +2,16 @@ package geometry
 
 import "math"
 
+// Perimeter calculates a perimeter
+func Perimeter(rect Rectangle) float64 {
+	return 2 * (rect.Length + rect.Width)
+}
+
+// Shape is an interface for more specific shapes
+type Shape interface {
+	Area() float64
+}
+
 // Rectangle is a basic shape with 4 sides
 type Rectangle struct {
 	Length float64
@@ -11,11 +21,6 @@ type Rectangle struct {
 // Circle is a basic shape
 type Circle struct {
 	Radius float64
-}
-
-// Perimeter calculates a perimeter
-func Perimeter(rect Rectangle) float64 {
-	return 2 * (rect.Length + rect.Width)
 }
 
 // Returns the area of a rectangle
