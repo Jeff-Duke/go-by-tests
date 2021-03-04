@@ -5,6 +5,9 @@ import (
 	"fmt"
 )
 
+// ErrInsufficientFunds will be displayed when trying to withdraw more than the balance of the wallet
+var ErrInsufficientFunds = errors.New("cannot withdraw, insufficient funds")
+
 // Crypto is a type alias for our Cryptocurrency
 type Crypto int
 
@@ -35,7 +38,7 @@ func (w *Wallet) Deposit(amt Crypto) {
 // Withdraw removes coin from the wallet
 func (w *Wallet) Withdraw(amt Crypto) error {
 	if amt > w.balance {
-		return errors.New("you've overdrawn your funds")
+		return ErrInsufficientFunds
 	}
 	w.balance -= amt
 	return nil
