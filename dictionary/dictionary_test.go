@@ -71,6 +71,7 @@ func assertStrings(t testing.TB, got, want string) {
 
 func assertError(t testing.TB, got, want error) {
 	t.Helper()
+
 	if got != want {
 		t.Errorf("got %q want %q", got, want)
 	}

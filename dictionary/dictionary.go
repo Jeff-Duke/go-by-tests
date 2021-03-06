@@ -1,14 +1,27 @@
+/*
+Package dictionary creates a module for working with words and their definitions.
+*/
 package dictionary
 
-import "errors"
-
+// Dictionary contains words with definitions
 type Dictionary map[string]string
 
-var (
-	ErrWordNotFound = errors.New("could not find the word you were looking for")
-	ErrWordExists   = errors.New("word already exists")
+const (
+	// ErrWordNotFound indicates we tried to find a word but it's not yet in the dictionary
+	ErrWordNotFound = Err("could not find the word you were looking for")
+
+	// ErrWordExists indicates we tried to add a word that already exists
+	ErrWordExists = Err("word already exists")
 )
 
+// An Err indicates an error on one of the dictionary operations
+type Err string
+
+func (e Err) Error() string {
+	return string(e)
+}
+
+// Add sets a new word/definition in the dictionary, if it doesn't already exist
 func (d Dictionary) Add(word, definition string) error {
 	_, err := d.Search(word)
 
@@ -24,6 +37,7 @@ func (d Dictionary) Add(word, definition string) error {
 	return nil
 }
 
+// Search is used to read words from the dictionary
 func (d Dictionary) Search(word string) (string, error) {
 	definition, ok := d[word]
 	if !ok {
