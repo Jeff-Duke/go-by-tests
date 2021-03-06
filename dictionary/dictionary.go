@@ -45,3 +45,8 @@ func (d Dictionary) Search(word string) (string, error) {
 	}
 	return definition, nil
 }
+
+// Update changes the definition of a word
+func (d Dictionary) Update(word, definition string) {
+	d[word] = definition
+}
