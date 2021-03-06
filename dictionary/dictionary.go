@@ -12,6 +12,9 @@ const (
 
 	// ErrWordExists indicates we tried to add a word that already exists
 	ErrWordExists = Err("word already exists")
+
+	// ErrNotExistsUpdate indicates we tried to update a word that does not exist
+	ErrNotExistsUpdate = Err("cannot update because word does not exist")
 )
 
 // An Err indicates an error on one of the dictionary operations
@@ -47,6 +50,16 @@ func (d Dictionary) Search(word string) (string, error) {
 }
 
 // Update changes the definition of a word
-func (d Dictionary) Update(word, definition string) {
-	d[word] = definition
+func (d Dictionary) Update(word, definition string) error {
+	_, err := d.Search(word)
+
+	switch err {
+	case ErrWordNotFound:
+		return ErrNotExistsUpdate
+	case nil:
+		d[word] = definition
+	default:
+		return err
+	}
+	return nil
 }
