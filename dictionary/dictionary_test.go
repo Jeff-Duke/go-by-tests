@@ -72,6 +72,19 @@ func TestUpdate(t *testing.T) {
 	})
 }
 
+func TestDelete(t *testing.T) {
+	word := "test"
+	definition := "this is only a test"
+	dictionary := Dictionary{word: definition}
+
+	dictionary.Delete(word)
+
+	_, err := dictionary.Search(word)
+	if err != ErrWordNotFound {
+		t.Errorf("Expected %q to be deleted", word)
+	}
+}
+
 func assertDefinition(t testing.TB, dictionary Dictionary, word, definition string) {
 	t.Helper()
 
